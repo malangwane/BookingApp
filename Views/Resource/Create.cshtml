@@ -1,0 +1,77 @@
+﻿@model BookingApp.Models.Resource
+@{
+    var isEdit = Model?.Id > 0;
+    ViewData["Title"] = isEdit ? "Edit Resource" : "Create Resource";
+}
+
+<h2 class="mb-4">
+    <i class="fas @(isEdit ? "fa-pen-to-square" : "fa-plus-circle") me-2"></i>
+    @(isEdit ? "Edit Resource" : "Create Resource")
+</h2>
+
+<form asp-action="@(isEdit ? "Edit" : "Create")" method="post" class="row g-3">
+    @if (isEdit)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="col-md-12">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Capacity" class="form-label"></label>
+        <input asp-for="Capacity" type="number" min="1" class="form-control" />
+        <span asp-validation-for="Capacity" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="IsAvailable" class="form-label d-block"></label>
+        <div class="form-check form-switch">
+            <input asp-for="IsAvailable" class="form-check-input" type="checkbox" />
+            <label class="form-check-label" for="IsAvailable">Available</label>
+        </div>
+        <span asp-validation-for="IsAvailable" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save me-1"></i> Save
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+</form>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+}
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#resourcesTable').DataTable({
+                pageLength: 15,
+                lengthChange: false,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search resources..."
+                }
+            });
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

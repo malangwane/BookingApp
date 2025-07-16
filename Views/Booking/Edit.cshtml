@@ -1,0 +1,66 @@
+﻿@model BookingApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h2 class="mb-4"><i class="fas fa-edit me-2"></i>Edit Booking</h2>
+
+<form asp-action="Edit" class="shadow p-4 rounded bg-light">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="ResourceId" class="form-label">
+            <i class="fas fa-cube me-1"></i> Resource
+        </label>
+        <select asp-for="ResourceId" class="form-select" asp-items="ViewBag.ResourceId"></select>
+        <span asp-validation-for="ResourceId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTime" class="form-label">
+            <i class="fas fa-clock me-1"></i> Start Time
+        </label>
+        <input asp-for="StartTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EndTime" class="form-label">
+            <i class="fas fa-clock me-1"></i> End Time
+        </label>
+        <input asp-for="EndTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BookedBy" class="form-label">
+            <i class="fas fa-user me-1"></i> Booked By
+        </label>
+        <input asp-for="BookedBy" class="form-control" />
+        <span asp-validation-for="BookedBy" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Purpose" class="form-label">
+            <i class="fas fa-align-left me-1"></i> Purpose
+        </label>
+        <input asp-for="Purpose" class="form-control" />
+        <span asp-validation-for="Purpose" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save me-1"></i> Save
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Cancel
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
