@@ -1,4 +1,4 @@
-﻿using BookingApp.Models; // Adjust namespace as needed
+﻿using BookingApp.Models; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
